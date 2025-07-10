@@ -254,6 +254,8 @@ class Pipe:
         model_family = self._get_model_family()
         if model_family == ModelFamily.CLAUDE3:
             return {
+                "anthropic_version": "bedrock-2023-05-31",
+                **base_params,
                 "messages": [
                     {
                         "role": "user",
