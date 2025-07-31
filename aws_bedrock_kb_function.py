@@ -13,7 +13,7 @@ import time
 from enum import Enum
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Tuple, Union
 
-import boto3
+import boto
 from botocore.exceptions import ClientError
 from pydantic import BaseModel, Field, validator
 
