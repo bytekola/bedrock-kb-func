@@ -119,25 +119,20 @@ RUN apt-get install -f -y --no-install-recommends && \
 # by copying local files, but this example focuses only on the system packages.
 COPY --chown=$UID:$GID ./backend/requirements.txt ./requirements.txt
 
-RUN pip3 install --no-cache-dir uv && \
+COPY python_packages/ /tmp/python_packages/
+
+RUN pip3 install --no-cache-dir --no-index --find-links=/tmp/python_packages/ uv && \
     if [ "$USE_CUDA" = "true" ]; then \
-    # This part still requires an internet connection for pip.
-    # To make it offline, you would copy your downloaded .whl files and use --no-index --find-links
-    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/$USE_CUDA_DOCKER_VER --no-cache-dir && \
-    uv pip install --system -r requirements.txt --no-cache-dir && \
-    python -c "import os; from sentence_transformers import SentenceTransformer; SentenceTransformer(os.environ['RAG_EMBEDDING_MODEL'], device='cpu')" && \
-    python -c "import os; from faster_whisper import WhisperModel; WhisperModel(os.environ['WHISPER_MODEL'], device='cpu', compute_type='int8', download_root=os.environ['WHISPER_MODEL_DIR'])"; \
-    python -c "import os; import tiktoken; tiktoken.get_encoding(os.environ['TIKTOKEN_ENCODING_NAME'])"; \
+    pip3 install --no-cache-dir --no-index --find-links=/tmp/python_packages/ torch torchvision torchaudio && \
+    uv pip install --system --no-index --find-links=/tmp/python_packages/ -r requirements.txt; \
     else \
-    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu --no-cache-dir && \
-    uv pip install --system -r requirements.txt --no-cache-dir && \
-    python -c "import os; from sentence_transformers import SentenceTransformer; SentenceTransformer(os.environ['RAG_EMBEDDING_MODEL'], device='cpu')" && \
-    python -c "import os; from faster_whisper import WhisperModel; WhisperModel(os.environ['WHISPER_MODEL'], device='cpu', compute_type='int8', download_root=os.environ['WHISPER_MODEL_DIR'])"; \
-    python -c "import os; import tiktoken; tiktoken.get_encoding(os.environ['TIKTOKEN_ENCODING_NAME'])"; \
+    pip3 install --no-cache-dir --no-index --find-links=/tmp/python_packages/ torch torchvision torchaudio && \
+    uv pip install --system --no-index --find-links=/tmp/python_packages/ -r requirements.txt; \
     fi; \
+    # Cleanup the copied packages to keep the final image smaller
+    rm -rf /tmp/python_packages/ && \
     chown -R $UID:$GID /app/backend/data/
 
-# (The rest of the file is unchanged)
 COPY --chown=$UID:$GID --from=build /app/build /app/build
 COPY --chown=$UID:$GID --from=build /app/CHANGELOG.md /app/CHANGELOG.md
 COPY --chown=$UID:$GID --from=build /app/package.json /app/package.json

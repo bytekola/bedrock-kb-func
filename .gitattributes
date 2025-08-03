@@ -1,3 +1,6 @@
 *.7z filter=lfs diff=lfs merge=lfs -text
 *.txt filter=lfs diff=lfs merge=lfs -text
 alpine_packages.txt filter=lfs diff=lfs merge=lfs -text
+*.whk filter=lfs diff=lfs merge=lfs -text
+*.whl filter=lfs diff=lfs merge=lfs -text
+python_packages/torch-2.7.1+cpu-cp313-cp313-win_amd64.whl filter=lfs diff=lfs merge=lfs -text
