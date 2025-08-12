@@ -1,0 +1,95 @@
+{
+  "app": "npx ts-node --prefer-ts-exts bin/bedrock-chat.ts",
+  "watch": {
+    "include": ["**", "../backend"],
+    "exclude": [
+      "README.md",
+      "../backend/**/__pycache__",
+      "../backend/tests/**",
+      "../backend/.mypy_cache/**",
+      "cdk*.json",
+      "**/*.d.ts",
+      "**/*.js",
+      "tsconfig.json",
+      "package*.json",
+      "yarn.lock",
+      "node_modules",
+      "test"
+    ]
+  },
+  "context": {
+    "@aws-cdk/core:bootstrapQualifier": "g631edsa8",
+    "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
+    "@aws-cdk/core:checkSecretUsage": true,
+    "@aws-cdk/core:target-partitions": ["aws", "aws-cn"],
+    "@aws-cdk-containers/ecs-service-extensions:enableDefaultLogDriver": true,
+    "@aws-cdk/aws-ec2:uniqueImdsv2TemplateName": true,
+    "@aws-cdk/aws-ecs:arnFormatIncludesClusterName": true,
+    "@aws-cdk/aws-iam:minimizePolicies": true,
+    "@aws-cdk/core:validateSnapshotRemovalPolicy": true,
+    "@aws-cdk/aws-codepipeline:crossAccountKeyAliasStackSafeResourceName": true,
+    "@aws-cdk/aws-s3:createDefaultLoggingPolicy": true,
+    "@aws-cdk/aws-sns-subscriptions:restrictSqsDescryption": true,
+    "@aws-cdk/aws-apigateway:disableCloudWatchRole": true,
+    "@aws-cdk/core:enablePartitionLiterals": true,
+    "@aws-cdk/aws-events:eventsTargetQueueSameAccount": true,
+    "@aws-cdk/aws-iam:standardizedServicePrincipals": true,
+    "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
+    "@aws-cdk/aws-iam:importedRoleStackSafeDefaultPolicyName": true,
+    "@aws-cdk/aws-s3:serverAccessLogsUseBucketPolicy": false,
+    "@aws-cdk/aws-route53-patters:useCertificate": true,
+    "@aws-cdk/customresources:installLatestAwsSdkDefault": false,
+    "@aws-cdk/aws-rds:databaseProxyUniqueResourceName": true,
+    "@aws-cdk/aws-codedeploy:removeAlarmsFromDeploymentGroup": true,
+    "@aws-cdk/aws-apigateway:authorizerChangeDeploymentLogicalId": true,
+    "@aws-cdk/aws-ec2:launchTemplateDefaultUserData": true,
+    "@aws-cdk/aws-secretsmanager:useAttachedSecretResourcePolicyForSecretTargetAttachments": true,
+    "@aws-cdk/aws-redshift:columnId": true,
+    "@aws-cdk/aws-stepfunctions-tasks:enableEmrServicePolicyV2": true,
+    "@aws-cdk/aws-ec2:restrictDefaultSecurityGroup": true,
+    "@aws-cdk/aws-apigateway:requestValidatorUniqueId": true,
+    "@aws-cdk/aws-kms:aliasNameRef": true,
+    "@aws-cdk/aws-autoscaling:generateLaunchTemplateInsteadOfLaunchConfig": true,
+    "@aws-cdk/core:includePrefixInUniqueNameGeneration": true,
+    "@aws-cdk/aws-opensearchservice:enableOpensearchMultiAzWithStandby": true,
+    "allowedIpV4AddressRanges": ["0.0.0.0/1", "128.0.0.0/1"],
+    "allowedIpV6AddressRanges": [
+      "0000:0000:0000:0000:0000:0000:0000:0000/1",
+      "8000:0000:0000:0000:0000:0000:0000:0000/1"
+    ],
+    "publishedApiAllowedIpV4AddressRanges": ["0.0.0.0/1", "128.0.0.0/1"],
+    "publishedApiAllowedIpV6AddressRanges": [
+      "0000:0000:0000:0000:0000:0000:0000:0000/1",
+      "8000:0000:0000:0000:0000:0000:0000:0000/1"
+    ],
+    "botStoreLanguage": "en",
+    "tokenValidMinutes": 30,
+    "enableBotStore": true,
+    "enableBotStoreReplicas": true,
+    "autoJoinUserGroups": [],
+    "userPoolDomainPrefix": "chat-bot",
+    "identityProviders": [
+
+    ],
+    "bedrockRegion": "eu-west-2",
+    "domain_name": "chat-bot.team-oz.org",
+    "certificateArn": "arn:aws:acm:eu-west-2:905418218462:certificate/84982d89-aa18-4bf7-b692-1e1205f8404b",
+    "vpcId": "vpc-000b940432ee09108",
+    "subnets": [
+      "subnet-0ca8f0a4a3a837d87",
+      "subnet-0c67223ea0bd859b7"
+    ],
+    "lb_subnets": [
+      "subnet-0abd873311e2920a9",
+      "subnet-0ede0c5fafe0fdfe8"
+    ],
+    "open_search_vpc_endpoint_id": "vpce-0822045a5ae4e368a",
+    "execute_api_vpc_endpoint_id": "vpce-02f724c5d787562de",
+    "s3_vpc_endpoint_id": "vpce-02e8ab0fde0904ff2",
+    "s3_endpoint_ips": [
+      "10.205.24.99",
+      "10.205.24.149"
+    ],
+    "alb_ingress_cidr": "10.0.0.0/8"
+  }
+}
